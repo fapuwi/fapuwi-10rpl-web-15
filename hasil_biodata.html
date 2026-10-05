@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hasil Biodata</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="hasil-form">
+
+    <div class="card">
+        <h1>Hasil Biodata:</h1>
+
+        <div class="result-box" id="outputTeks"></div>
+
+        <a href="form_biodata.html" class="btn-reset">isi form lagi</a>
+    </div>
+
+    <script>
+        const outputTeks = document.getElementById('outputTeks');
+        const dataMentah = localStorage.getItem('biodata');
+
+        if (dataMentah) {
+            const data = JSON.parse(dataMentah);
+            outputTeks.innerHTML = `
+                <b>Nama:</b> ${data.nama}<br>
+                <b>Alamat:</b> ${data.alamat}<br>
+                <b>Jurusan:</b> ${data.jurusan}<br>
+                <b>Jenis Kelamin:</b> ${data.jk}<br>
+                <b>Tinggi Badan:</b> ${data.tinggi} cm<br>
+                <b>Berat Badan:</b> ${data.berat} kg<br>
+                <b>Hobi:</b> ${data.hobi}<br>
+                <b>No. HP:</b> ${data.nohp}
+            `;
+        } else {
+            outputTeks.innerHTML = `<i>Belum ada data biodata yang diisi.</i>`;
+        }
+    </script>
+</body>
+</html>

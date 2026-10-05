@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biodata Form</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="biodata-form">
+
+    <div class="card">
+        <h1>BIODATA</h1>
+
+        <form id="biodataForm">
+            <div class="form-group">
+                <label>Nama:</label>
+                <input type="text" id="nama" required>
+            </div>
+
+            <div class="form-group">
+                <label>Alamat:</label>
+                <textarea id="alamat" rows="3" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Jurusan:</label>
+                <div class="select-wrapper">
+                    <select id="jurusan">
+                        <option value="RPL">RPL</option>
+                        <option value="TKJ">TKJ</option>
+                        <option value="TSM">TSM</option>
+                        <option value="TEI">TEI</option>
+                        <option value="TKR">TKR</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Jenis Kelamin:</label>
+                <div class="radio-group">
+                    <label class="radio-label">
+                        <input type="radio" name="jk" value="Laki-laki" checked> Laki-laki
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="jk" value="Perempuan"> Perempuan
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Tinggi Badan (cm):</label>
+                <input type="number" id="tinggi" required>
+            </div>
+
+            <div class="form-group">
+                <label>Berat Badan (kg):</label>
+                <input type="number" id="berat" required>
+            </div>
+
+            <div class="form-group">
+                <label>Hobi:</label>
+                <input type="text" id="hobi" required>
+            </div>
+
+            <div class="form-group">
+                <label>No. HP:</label>
+                <input type="text" id="nohp">
+            </div>
+
+            <button type="submit" class="btn-submit">Simpan</button>
+        </form>
+    </div>
+
+    <script>
+        const form = document.getElementById('biodataForm');
+        const nohpInput = document.getElementById('nohp');
+
+        nohpInput.addEventListener('input', function() {
+            let val = this.value.replace(/\D/g, ''); 
+            if (val.length > 13) {
+                val = val.substring(0, 13);
+            }
+            this.value = val;
+        });
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const dataBiodata = {
+                nama: document.getElementById('nama').value,
+                alamat: document.getElementById('alamat').value,
+                jurusan: document.getElementById('jurusan').value,
+                jk: document.querySelector('input[name="jk"]:checked').value,
+                tinggi: document.getElementById('tinggi').value,
+                berat: document.getElementById('berat').value,
+                hobi: document.getElementById('hobi').value,
+                nohp: nohpInput.value
+            };
+
+            localStorage.setItem('biodata', JSON.stringify(dataBiodata));
+            window.location.href = 'hasil_biodata.html';
+        });
+    </script>
+</body>
+</html>
